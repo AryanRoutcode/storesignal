@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>
+        AI Representation Dashboard
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='css/style.css') }}"
+    >
+
+</head>
+
+<body>
+
+    <!-- HERO SECTION -->
+
+    <section class="hero-section">
+
+        <h1 class="hero-title">
+            AI Representation Analytics Dashboard
+        </h1>
+
+        <p class="hero-subtitle">
+            Intelligent Product Optimization Platform
+        </p>
+
+    </section>
+
+    <!-- KPI SECTION -->
+
+    <section class="kpi-grid">
+
+        <!-- TOTAL PRODUCTS -->
+
+        <div class="kpi-card">
+
+            <h3>
+                Total Products
+            </h3>
+
+            <div class="kpi-value">
+                {{ insights.total_products }}
+            </div>
+
+        </div>
+
+        <!-- AVERAGE AI SCORE -->
+
+        <div class="kpi-card">
+
+            <h3>
+                Average AI Score
+            </h3>
+
+            <div class="kpi-value">
+                {{ insights.average_ai_score }}
+            </div>
+
+        </div>
+
+        <!-- AVERAGE SEO SCORE -->
+
+        <div class="kpi-card">
+
+            <h3>
+                Average SEO Score
+            </h3>
+
+            <div class="kpi-value">
+                {{ insights.average_seo_score }}
+            </div>
+
+        </div>
+
+        <!-- BEST PRODUCT -->
+
+        <div class="kpi-card">
+
+            <h3>
+                Best Product
+            </h3>
+
+            <div class="kpi-small-text">
+                {{ insights.best_product }}
+            </div>
+
+        </div>
+
+        <!-- WEAKEST PRODUCT -->
+
+        <div class="kpi-card">
+
+            <h3>
+                Weakest Product
+            </h3>
+
+            <div class="kpi-small-text">
+                {{ insights.worst_product }}
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- AI CHART -->
+
+    <section class="chart-section">
+
+        <h2 class="chart-title">
+            AI Readiness Analytics
+        </h2>
+
+        <img
+            src="{{ url_for('static', filename='charts/score_chart.png') }}"
+            class="chart-image"
+        >
+
+    </section>
+
+    <!-- SEO CHART -->
+
+    <section class="chart-section">
+
+        <h2 class="chart-title">
+            SEO Performance Analytics
+        </h2>
+
+        <img
+            src="{{ url_for('static', filename='charts/seo_chart.png') }}"
+            class="chart-image"
+        >
+
+    </section>
+
+    <!-- PRODUCT SECTION -->
+
+    <section class="dashboard-container">
+
+        {% for product in products %}
+
+        <div class="product-card">
+
+            <!-- PRODUCT HEADER -->
+
+            <div class="product-header">
+
+                <div>
+
+                    <h2 class="product-title">
+                        {{ product.title }}
+                    </h2>
+
+                    <div class="product-info-row">
+
+                        <div class="info-box">
+
+                            <p class="info-label">
+                                Product Price
+                            </p>
+
+                            <p class="info-value">
+                                ₹{{ product.price }}
+                            </p>
+
+                        </div>
+
+                        <div class="info-box">
+
+                            <p class="info-label">
+                                AI Readiness Score
+                            </p>
+
+                            <p class="info-value glow-text">
+                                {{ product.audit_score }}/100
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <!-- STATUS -->
+
+                <div>
+
+                    {% if product.status == "HIGH AI READINESS" %}
+
+                        <span class="status-badge high-status">
+
+                            {{ product.status }}
+
+                        </span>
+
+                    {% elif product.status == "MEDIUM AI READINESS" %}
+
+                        <span class="status-badge medium-status">
+
+                            {{ product.status }}
+
+                        </span>
+
+                    {% else %}
+
+                        <span class="status-badge low-status">
+
+                            {{ product.status }}
+
+                        </span>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            <!-- PRIORITY -->
+
+            <div class="glass-card">
+
+                <h3 class="section-heading">
+                    Optimization Priority
+                </h3>
+
+                {% if product.priority == "HIGH IMPACT" %}
+
+                    <span class="priority-chip high-priority">
+
+                        {{ product.priority }}
+
+                    </span>
+
+                {% elif product.priority == "MEDIUM IMPACT" %}
+
+                    <span class="priority-chip medium-priority">
+
+                        {{ product.priority }}
+
+                    </span>
+
+                {% else %}
+
+                    <span class="priority-chip low-priority">
+
+                        {{ product.priority }}
+
+                    </span>
+
+                {% endif %}
+
+            </div>
+
+            <!-- ISSUES + RECOMMENDATIONS -->
+
+            <div class="double-grid">
+
+                <!-- ISSUES -->
+
+                <div class="glass-card">
+
+                    <h3 class="section-heading">
+                        Detected Issues
+                    </h3>
+
+                    <ul class="custom-list">
+
+                        {% for issue in product.issues %}
+
+                            <li class="content-text">
+                                {{ issue }}
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+                <!-- RECOMMENDATIONS -->
+
+                <div class="glass-card">
+
+                    <h3 class="section-heading">
+                        AI Recommendations
+                    </h3>
+
+                    <ul class="custom-list">
+
+                        {% for rec in product.recommendations %}
+
+                            <li class="content-text">
+                                {{ rec }}
+                            </li>
+
+                        {% endfor %}
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+            <!-- SEMANTIC ANALYSIS -->
+
+            <div class="glass-card">
+
+                <h3 class="section-heading">
+                    Semantic Analysis
+                </h3>
+
+                <div class="seo-box">
+
+                    SEO SCORE :
+                    <span>
+                        {{ product.semantic_analysis.seo_score }}/100
+                    </span>
+
+                </div>
+
+                <div class="double-grid">
+
+                    <!-- STRENGTHS -->
+
+                    <div>
+
+                        <h4 class="mini-heading">
+                            Strengths
+                        </h4>
+
+                        <ul class="custom-list">
+
+                            {% for strength in product.semantic_analysis.strengths %}
+
+                                <li class="content-text">
+                                    {{ strength }}
+                                </li>
+
+                            {% endfor %}
+
+                        </ul>
+
+                    </div>
+
+                    <!-- WEAKNESSES -->
+
+                    <div>
+
+                        <h4 class="mini-heading">
+                            Weaknesses
+                        </h4>
+
+                        <ul class="custom-list">
+
+                            {% for weak in product.semantic_analysis.weaknesses %}
+
+                                <li class="content-text">
+                                    {{ weak }}
+                                </li>
+
+                            {% endfor %}
+
+                        </ul>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- EXPLAINABLE AI -->
+
+            <div class="glass-card">
+
+                <h3 class="section-heading">
+                    Explainable AI Insights
+                </h3>
+
+                <ul class="custom-list">
+
+                    {% for exp in product.ai_explanations %}
+
+                        <li class="content-text">
+                            {{ exp }}
+                        </li>
+
+                    {% endfor %}
+
+                </ul>
+
+            </div>
+
+            <!-- OPTIMIZATION ENGINE -->
+
+            <div class="improved-box">
+
+                <h3 class="section-heading">
+                    Optimization Engine
+                </h3>
+
+                <div class="optimization-section">
+
+                    <h4 class="mini-heading">
+                        Original Description
+                    </h4>
+
+                    <p class="description-text">
+                        {{ product.optimization.original_description }}
+                    </p>
+
+                </div>
+
+                <div class="optimization-section">
+
+                    <h4 class="mini-heading">
+                        Optimized Description
+                    </h4>
+
+                    <p class="description-text">
+                        {{ product.optimization.optimized_description }}
+                    </p>
+
+                </div>
+
+                <div class="improvement-score">
+
+                    Improvement Score :
+                    {{ product.optimization.improvement_score }}
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </section>
+
+</body>
+
+</html>
