@@ -46,10 +46,10 @@ StoreSignal is a merchant intelligence platform that:
 ![Dashboard](screenshots/dashboard.png)
 
 ### Product Analysis Screen
-![Product Analysis](screenshots/product_analysis.png)
+![Product Analysis](screenshots/product_analysis.png.jpeg)
 
 ### KPI Analytics
-![KPI Analytics](screenshots/kpi_analytics.png)
+![KPI Analytics](screenshots/kpi_analytics.png.jpeg)
 
 ### Recommendation Results
 ![Recommendations](screenshots/recommendations.png)
