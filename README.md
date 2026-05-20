@@ -36,7 +36,7 @@ StoreSignal is a merchant intelligence platform that:
 
 ## Demo Video
 
-▶️ [Watch the demo](https://drive.google.com/file/d/1oy3CgAnZLMQnR6nHkUV4JEl2OgvNSNld/view?usp=drivesdk)
+▶️ [Watch the demo](https://drive.google.com/file/d/15S3ylYwry1IEq38JTekrWpCTkRiG-N2C/view?usp=sharing)
 
 ---
 
@@ -264,7 +264,7 @@ Open your browser at `http://localhost:5000`
 - **Hackathon:** Kasparro Agentic Commerce Hackathon 2026
 - **Track:** Track 5 — AI Representation Optimizer
 - **Deadline:** 20th May 2026, 11:59 PM IST
-- **Demo Video:** [Link](https://drive.google.com/file/d/1oy3CgAnZLMQnR6nHkUV4JEl2OgvNSNld/view?usp=drivesdk)
+- **Demo Video:** [Link](https://drive.google.com/file/d/15S3ylYwry1IEq38JTekrWpCTkRiG-N2C/view?usp=sharing)
 - **GitHub:** [AryanRoutcode/storesignal](https://github.com/AryanRoutcode/storesignal)
 
 ---
