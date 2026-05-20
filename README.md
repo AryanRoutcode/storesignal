@@ -255,7 +255,7 @@ Open your browser at `http://localhost:5000`
 | Name | Role |
 |---|---|
 | Aryan Rout | Product Thinking, AI Workflow, Documentation, Demo Video |
-| Sambhav Sahoo | Backend Development, Dashboard UI, Analytics Engine, Deployment |
+| Sambhav Sahoo | Backend Development, Dashboard UI, Analytics Engine |
 
 ---
 
