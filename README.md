@@ -201,7 +201,6 @@ If AI-generated recommendations fail, the deterministic analysis pipeline still 
 
 Future enhancements planned for StoreSignal include:
 
-- Real Shopify API Integration
 - Multi-store analysis support
 - Real-time AI monitoring
 - Advanced product clustering
