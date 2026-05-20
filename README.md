@@ -1,212 +1,321 @@
-# StoreSignal 🔍
-### Understand how AI shopping agents see your Shopify store. Fix gaps. Get recommended.
+# StoreSignal 🔍  
+## AI Representation Optimizer for Digital Commerce
 
-> **Kasparro Agentic Commerce Hackathon 2026 — Track 5: AI Representation Optimizer**
+StoreSignal is an intelligent product analysis and optimization platform designed to evaluate how effectively products are represented for AI systems, search engines, and modern digital commerce environments.
 
----
-
-## The Problem
-
-AI shopping agents (ChatGPT, Google AI, Perplexity) now recommend products directly inside conversations — without sending users to websites. These agents read store data: product descriptions, policies, reviews, and metadata. If that data is vague, incomplete, or contradictory, the AI either skips the merchant or misrepresents them.
-
-**Merchants have zero visibility into how AI agents perceive them. StoreSignal fixes that.**
+The platform analyzes product descriptions, semantic quality, SEO strength, trust indicators, and content clarity to generate actionable optimization insights for merchants and businesses.
 
 ---
 
-## What StoreSignal Does
+# 🚀 Features
 
-StoreSignal is a merchant intelligence platform that:
-
-1. **Diagnoses** — Connects to a Shopify store and analyzes how AI agents currently perceive it
-2. **Scores** — Generates an AI Readiness Score (0–100) across 6 dimensions
-3. **Detects** — Identifies ambiguity, missing information, and weak trust signals
-4. **Fixes** — AI rewrites vague descriptions, unclear policies, and generates store-specific FAQs
-5. **Shows** — Before vs. After comparison showing exactly how AI perception improves
-
----
-
-## Demo Video
-
-▶️ [Watch the demo](https://drive.google.com/file/d/1oy3CgAnZLMQnR6nHkUV4JEl2OgvNSNld/view?usp=drivesdk)
+- AI Readiness Scoring
+- SEO Quality Evaluation
+- Product Representation Analysis
+- Ambiguity Detection Engine
+- AI-Based Product Recommendations
+- Explainable Analytics Dashboard
+- Best & Weakest Product Identification
+- KPI-Based Product Insights
+- Interactive Dashboard UI
+- Smart Product Optimization Suggestions
 
 ---
 
-## Screenshots
+# 🧠 Problem Statement
 
-### AI Readiness Dashboard
-![Dashboard](screenshots/dashboard.png)
+Modern AI shopping assistants such as ChatGPT, Perplexity, and Google AI increasingly depend on structured and meaningful product information while recommending products to users.
 
-### AI Perception Gap
-![Perception Gap](screenshots/perception_gap.png)
+However, many online product listings contain:
 
-### Before vs After Optimization
-![Before After](screenshots/before_after.png)
+- Vague descriptions
+- Missing trust information
+- Weak semantic structure
+- Poor SEO optimization
+- Incomplete product metadata
 
-### Ranked Action Plan
-![Action Plan](screenshots/action_plan.png)
+Due to these issues, AI systems may misunderstand products or fail to recommend them effectively.
+
+StoreSignal solves this challenge by analyzing product representation quality and generating intelligent optimization recommendations through a hybrid AI + deterministic architecture.
 
 ---
 
-## How It Works
+# ⚙️ Core Functionalities
 
+## Product Analysis
+
+The platform evaluates:
+
+- Product Title Quality
+- Description Clarity
+- SEO Readiness
+- AI Readiness
+- Trust Signals
+- Semantic Consistency
+- Ambiguous Wording
+- Missing Product Information
+
+---
+
+## Dashboard Analytics
+
+The dashboard dynamically displays:
+
+- Total Products
+- Average AI Score
+- Average SEO Score
+- Best Product
+- Weakest Product
+- Product Recommendations
+- Semantic Analysis Reports
+
+---
+
+## AI Recommendation Engine
+
+The system generates:
+
+- Product improvement suggestions
+- Better semantic recommendations
+- Missing detail alerts
+- Optimization guidance
+- Trust enhancement suggestions
+
+---
+
+# 🏗️ System Architecture
+
+```text
+User Input
+    ↓
+Flask Backend
+    ↓
+Product Processing Engine
+    ↓
+Scoring & Analytics Services
+    ↓
+AI Representation Evaluation
+    ↓
+Dashboard Visualization
 ```
-Merchant connects Shopify store (OAuth)
-        ↓
-System fetches products, policies, FAQs, reviews, metadata
-        ↓
-Deterministic Audit Engine
-(missing fields, policy completeness, schema validation)
-        ↓
-OpenAI Semantic Analysis
-(ambiguity detection, AI perception simulation, rewrite generation)
-        ↓
-Hybrid Scoring Engine
-(AI Readiness Score, Trust Score, Recommendation Confidence)
-        ↓
-Merchant Dashboard
-(score, perception gap, before/after, ranked action plan)
-```
 
 ---
 
-## Tech Stack
+# 📁 Project Structure
 
-| Layer | Technology |
-|---|---|
-| Frontend | React + Tailwind CSS |
-| Backend | Python + Flask |
-| AI Layer | OpenAI API |
-| Database | PostgreSQL + SQLAlchemy |
-| Store Data | Shopify Admin API |
-| Charts | Matplotlib |
-| Deployment | Render |
-
----
-
-## AI vs Deterministic Logic
-
-| Deterministic (Code Rules) | AI (OpenAI API) |
-|---|---|
-| Missing field detection | Ambiguity analysis |
-| Policy completeness checks | AI perception simulation |
-| Schema/metadata validation | Rewrite suggestions |
-| Scoring calculations | Recommendation confidence |
-| KPI aggregation | Contextual reasoning |
-
----
-
-## Project Structure
-
-```
+```text
 storesignal/
 │
-├── README.md
-├── DECISION_LOG.md
-├── CONTRIBUTION.md
+├── services/
+│   ├── ambiguity_engine.py
+│   ├── analytics_engine.py
+│   ├── audit_engine.py
+│   ├── explainability_engine.py
+│   ├── openai_service.py
+│   ├── scoring_engine.py
+│   └── shopify_service.py
 │
-├── docs/
-│   ├── product_document.pdf
-│   └── technical_document.pdf
+├── static/
+│   ├── charts/
+│   └── css/
+│       └── style.css
 │
-├── backend/
-│   ├── app.py
-│   ├── routes/
-│   └── services/
-│       ├── shopify_service.py
-│       ├── scoring_engine.py
-│       ├── openai_service.py
-│       ├── audit_engine.py
-│       ├── fallback_handler.py
-│       └── analytics_engine.py
+├── templates/
+│   ├── dashboard.html
+│   └── submit_product.html
 │
-├── frontend/
-│   ├── src/
-│   └── package.json
+├── database/
+│   └── models.py
 │
-└── screenshots/
+├── routes/
+│   └── main_routes.py
+│
+├── app.py
+├── config.py
+├── requirements.txt
+├── Procfile
+└── README.md
 ```
 
 ---
 
-## Setup Instructions
+# 🧪 AI vs Deterministic Processing
 
-### Prerequisites
-- Python 3.10+
-- Node.js 18+
-- PostgreSQL
-- Shopify Partner account
-- OpenAI API key
+| Deterministic Logic | AI-Based Processing |
+|--------------------|--------------------|
+| Missing field detection | Ambiguity analysis |
+| SEO calculations | Semantic understanding |
+| KPI score generation | AI recommendation generation |
+| Rule-based validation | Contextual product evaluation |
+| Dashboard analytics | Product optimization suggestions |
 
-### Backend Setup
+---
+
+# 📊 Dashboard Metrics
+
+The dashboard calculates and displays:
+
+- Total Products Analyzed
+- Average AI Readiness Score
+- Average SEO Score
+- Best Performing Product
+- Weakest Product
+- Product-Level Semantic Reports
+- Optimization Suggestions
+- AI Readiness Status
+
+---
+
+# ⚡ Technologies Used
+
+| Layer | Technology |
+|------|------|
+| Backend | Flask (Python) |
+| Frontend | HTML, CSS, Jinja2 |
+| AI Layer | OpenAI API |
+| Database | SQLAlchemy |
+| Visualization | Matplotlib |
+| Deployment | Render |
+| Version Control | GitHub |
+
+---
+
+# 🛡️ Failure Handling
+
+The platform includes fallback mechanisms to ensure stability during unexpected conditions.
+
+### Implemented Handling:
+
+- Invalid product data handling
+- Missing description detection
+- Empty field validation
+- Fallback scoring mechanism
+- Safe dashboard rendering
+- Exception handling inside analytics services
+
+If AI-generated recommendations fail, the deterministic analysis pipeline still produces valid scoring and analytics results.
+
+---
+
+# 📈 Future Improvements
+
+Future enhancements planned for StoreSignal include:
+
+- Real Shopify API Integration
+- Multi-store analysis support
+- Real-time AI monitoring
+- Advanced product clustering
+- AI-generated FAQ optimization
+- Competitor benchmarking
+- Exportable analytics reports
+- Multi-language optimization
+
+---
+
+# ▶️ Demo Video
+
+Demo Video Link:  
+PASTE_YOUR_VIDEO_LINK_HERE
+
+---
+
+# 📷 Project Screenshots
+
+Add screenshots here:
+
+- Dashboard UI
+- Product Analysis Screen
+- KPI Analytics
+- Recommendation Results
+- Semantic Analysis Output
+
+---
+
+# 👨‍💻 Team Contribution
+
+| Name | Contribution |
+|------|--------------|
+| Sambhav Sahoo | Backend Development, Dashboard UI, Analytics Engine, Deployment |
+| Aryan Rout | Product Ideation, Documentation, AI Workflow Planning |
+
+---
+
+# 🚀 Setup Instructions
+
+## Clone Repository
 
 ```bash
-# Clone the repo
 git clone https://github.com/AryanRoutcode/storesignal.git
 cd storesignal
-
-# Create virtual environment
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
-
-# Install dependencies
-pip install -r backend/requirements.txt
-
-# Set environment variables
-cp .env.example .env
-# Fill in: OPENAI_API_KEY, SHOPIFY_API_KEY, DATABASE_URL
-
-# Run database migrations
-flask db upgrade
-
-# Start backend
-cd backend
-flask run
 ```
 
-### Frontend Setup
+---
+
+## Create Virtual Environment
 
 ```bash
-cd frontend
-npm install
-npm start
+python -m venv venv
 ```
 
-### Environment Variables
+### Windows
 
-```
-OPENAI_API_KEY=your_openai_key
-SHOPIFY_API_KEY=your_shopify_key
-SHOPIFY_API_SECRET=your_shopify_secret
-DATABASE_URL=postgresql://localhost/storesignal
-FLASK_SECRET_KEY=your_secret_key
+```bash
+venv\Scripts\activate
 ```
 
 ---
 
-## What the Judges Will See
+## Install Dependencies
 
-- **AI Readiness Score** — overall score out of 100
-- **Trust Score** — how credible the store appears to AI agents
-- **Recommendation Confidence** — likelihood of AI recommending this store
-- **AI Perception Simulation** — exactly how an AI agent would describe the store
-- **Ambiguity Detection** — specific vague phrases flagged with reasoning
-- **Before vs. After** — rewritten descriptions, policies, and generated FAQ
-- **Ranked Action Plan** — top fixes sorted by business impact
+```bash
+pip install -r requirements.txt
+```
 
 ---
 
-## Team
+## Run the Application
 
-| Name | Role |
-|---|---|
-| Aryan Rout | Product Thinking, AI Layer, Documentation, Demo |
-| Sambhav Sahoo | Backend Architecture, Shopify Integration, Audit Engine, Database, Deployment |
+```bash
+python app.py
+```
 
 ---
 
-## Submission
+# 🌐 Deployment
 
-- **Hackathon:** Kasparro Agentic Commerce Hackathon 2026
-- **Track:** Track 5 — AI Representation Optimizer
-- **Deadline:** 20th May 2026, 11:59 PM IST
-- **Demo Video:** [Link](https://drive.google.com/file/d/1oy3CgAnZLMQnR6nHkUV4JEl2OgvNSNld/view?usp=drivesdk)
+The project is configured for deployment using Render.
+
+Deployment includes:
+
+- Flask Backend Hosting
+- Static File Serving
+- Environment Variable Configuration
+- Procfile-Based Startup Configuration
+
+---
+
+# 📄 License
+
+This project was developed for educational and hackathon purposes under the Kasparro Agentic Commerce Hackathon 2026.
+
+---
+
+# 🏁 Hackathon Submission
+
+### Event:
+Kasparro Agentic Commerce Hackathon 2026
+
+### Track:
+Track 5 — AI Representation Optimizer
+
+### Submission Includes:
+
+- Product Document
+- Technical Document
+- GitHub Repository
+- Demo Video
+- README Documentation
+- Project Architecture
+- Dashboard Walkthrough
+
+---
