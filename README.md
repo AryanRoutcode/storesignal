@@ -280,19 +280,6 @@ python app.py
 
 ---
 
-# 🌐 Deployment
-
-The project is configured for deployment using Render.
-
-Deployment includes:
-
-- Flask Backend Hosting
-- Static File Serving
-- Environment Variable Configuration
-- Procfile-Based Startup Configuration
-
----
-
 # 📄 License
 
 This project was developed for educational and hackathon purposes under the Kasparro Agentic Commerce Hackathon 2026.
