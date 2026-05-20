@@ -209,4 +209,4 @@ FLASK_SECRET_KEY=your_secret_key
 - **Hackathon:** Kasparro Agentic Commerce Hackathon 2026
 - **Track:** Track 5 — AI Representation Optimizer
 - **Deadline:** 20th May 2026, 11:59 PM IST
-- **Demo Video:** [Link](YOUR_YOUTUBE_LINK_HERE)
+- **Demo Video:** [Link](https://drive.google.com/file/d/1oy3CgAnZLMQnR6nHkUV4JEl2OgvNSNld/view?usp=drivesdk)
