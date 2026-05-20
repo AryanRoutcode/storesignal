@@ -1,147 +1,228 @@
-# StoreSignal — Decision Log
+# DECISION LOG — StoreSignal
 
-> Every significant decision made during the build of StoreSignal.
-> Format: We considered X, chose Y, because Z.
-> This log was maintained throughout the build process, not written at the end.
-
----
-
-## Day 1 — Planning & Problem Deep Dive
-
-**Decision: Track Selection**
-We considered all 5 tracks. Chose Track 5 (AI Representation Optimizer) because it is the closest to a real product problem — not a demo exercise. Every Shopify merchant will eventually face the problem of AI agent visibility. Building the diagnostic layer felt like the most original and commercially relevant contribution.
-
-**Decision: Project Name**
-We considered names including "ShopLens", "RepresentAI", and "AuraCheck". Chose "StoreSignal" because it is short, memorable, immediately communicates the idea of broadcasting information to AI agents, and works cleanly as a GitHub repo name and product brand.
-
-**Decision: Input Method — URL vs Manual Paste**
-We considered two approaches: (1) merchant pastes their product description manually, (2) we connect directly to their Shopify store via API. Chose Shopify Admin API integration as the primary method because manual paste creates friction and limits analysis depth. Manual input is kept as a fallback only.
+## Project
+StoreSignal — AI Representation Optimizer for Digital Commerce
 
 ---
 
-## Day 2 — Foundation Setup
+# Decision 1 — Hybrid AI + Deterministic Architecture
 
-**Decision: Backend Framework — Flask vs Django**
-We considered both Flask and Django. Chose Flask because of its lightweight architecture, fast development cycle, and simple AI service integration. Django's ORM and admin overhead were unnecessary for this project scope. Flask allowed each AI module to be plugged in independently.
+## Considered
+- Fully AI-driven analysis system
+- Fully rule-based scoring engine
+- Hybrid architecture combining both approaches
 
-**Decision: Database — PostgreSQL vs SQLite**
-We considered SQLite for simplicity. Chose PostgreSQL because it is production-ready, supports concurrent analysis requests, and is compatible with our Render deployment. SQLite would have been a bottleneck for multi-merchant data storage.
+## Chosen
+Hybrid AI + deterministic architecture.
 
-**Decision: Frontend Framework — React vs Flask Templates**
-We considered using Flask Jinja templates for the entire frontend. Chose React + Tailwind CSS because the dashboard requires dynamic state management — score animations, before/after toggling, copy-to-clipboard — which is painful in pure Jinja. React makes these interactions clean and maintainable.
+## Reason
+A purely AI-based system could generate inconsistent scoring and unpredictable outputs. A fully rule-based system would lack contextual understanding and semantic reasoning.
 
----
+The hybrid approach allowed us to combine:
+- Deterministic reliability for measurable metrics
+- AI reasoning for ambiguity detection and semantic analysis
 
-## Day 3 — Shopify Integration
-
-**Decision: Shopify API — Admin API vs Storefront API**
-We considered the Shopify Storefront API (public, no auth needed). Chose the Admin API because it gives access to policies, metadata, and detailed product attributes that the Storefront API does not expose. Policies and metadata are critical for AI readiness analysis.
-
-**Decision: Data Fetching Scope**
-We considered fetching only product descriptions. Chose to fetch: product titles, descriptions, variants, policies, FAQ content, metadata, and review data. Reasoning: AI agents read all of this when forming a store perception. Analyzing only descriptions would miss 60% of the problem.
+This created a more explainable and stable product evaluation workflow.
 
 ---
 
-## Day 4 — Deterministic Audit Engine
+# Decision 2 — Product-Level Analysis Instead of Full Store Crawling
 
-**Decision: Scoring Dimensions**
-We considered a single overall score. Chose 6 separate dimension scores (product descriptions, policy clarity, FAQ coverage, trust signals, structured data, review quality) because a single score hides where the problem is. Merchants need to know which specific area to fix first.
+## Considered
+- Full Shopify store crawling
+- Product-by-product analysis workflow
 
-**Decision: FAQ Scoring — Binary vs Nuanced**
-We considered scoring FAQ presence as binary (yes = 1, no = 0). Chose nuanced scoring (no FAQ = 5, basic FAQ = 45, detailed FAQ = 85) because a store with one FAQ question is almost as helpless as a store with none. Granular scoring produces more actionable results.
+## Chosen
+Focused product-level analysis.
 
-**Decision: What Counts as a "Weak" Description**
-We defined weak descriptions as: under 30 words, no material/dimension mentions, no technical specifications, only generic adjectives (beautiful, great, amazing). This threshold was set after testing 10 real Shopify store descriptions and identifying the common failure patterns.
+## Reason
+Building complete store crawling with production-grade Shopify synchronization would increase implementation complexity and reduce focus on the core AI representation problem.
 
----
+A product-level workflow allowed:
+- Faster analysis
+- Clearer dashboard visualization
+- Easier explainability
+- Better demo flow for the hackathon
 
-## Day 5 — OpenAI Integration
-
-**Decision: AI Model Selection — GPT-4 vs GPT-3.5 vs Claude**
-We considered Claude API (already accessible), GPT-3.5 (cheaper), and GPT-4. Chose OpenAI GPT-4 because it produces more structured JSON outputs reliably, handles long product descriptions without degradation, and has better performance on semantic ambiguity detection tasks in our tests.
-
-**Decision: Prompt Architecture — Single Prompt vs Chained Prompts**
-We considered one large prompt that does everything. Chose separate chained prompts for: (1) ambiguity detection, (2) AI perception simulation, (3) rewrite generation, (4) FAQ generation. Reasoning: smaller focused prompts produce better quality outputs than one giant prompt. Also easier to debug when one step fails.
-
-**Decision: JSON Output Enforcement**
-We considered parsing free-text AI outputs. Chose to enforce strict JSON output from all prompts because free-text parsing is fragile. All prompts specify exact JSON schema. Responses are validated before use. If JSON parsing fails, fallback handler activates.
-
-**Decision: Where AI Starts and Code Ends**
-Deliberate boundary: if a check can be expressed as a rule, it is deterministic. If it requires understanding meaning, context, or intent — it goes to the AI layer. This keeps scoring consistent while making semantic analysis intelligent. Mixed responsibility would make debugging impossible.
+This helped us prioritize depth of analysis instead of broad infrastructure complexity.
 
 ---
 
-## Day 6 — Dashboard & Visualization
+# Decision 3 — Explainable Analytics Instead of Black-Box Scores
 
-**Decision: Chart Generation — Matplotlib vs Recharts**
-We considered Recharts (React-based, interactive). Chose Matplotlib for backend chart generation because server-side rendering is more stable, consistent across browsers, and charts can be exported for PDF reports. Recharts would have required significant state management for the analytics we needed.
+## Considered
+- Simple numerical scoring only
+- Explainable scoring with reasoning
 
-**Decision: Before vs After UI Layout**
-We considered showing before/after as separate pages. Chose side-by-side comparison on the same screen because merchants need to see the contrast immediately — the gap between current and optimized content is the core insight. Separate pages reduce the impact of that contrast.
+## Chosen
+Explainable analytics engine.
 
-**Decision: Action Plan Ranking**
-We considered alphabetical ordering of recommendations. Chose impact-based ranking (highest business impact first) because merchants have limited time. The first thing they see should be the highest-value fix. Impact scores are calculated from: how often this issue causes AI agents to skip merchants, and effort required to fix.
+## Reason
+The core problem in Track 5 is visibility into how AI systems interpret merchant data.
 
----
+Showing only a score would not help merchants understand:
+- Why a product scored poorly
+- Which fields caused problems
+- What improvements were required
 
-## Day 7 — Failure Handling
-
-**Decision: Fallback Strategy When OpenAI Fails**
-We considered showing an error screen when OpenAI API fails. Chose graceful degradation: deterministic scoring continues, default rule-based recommendations are shown, dashboard remains functional. A partial result is always better than a crashed screen. Retry logic with 3 attempts and exponential backoff before fallback activates.
-
-**Decision: Invalid Input Handling**
-We considered rejecting invalid inputs with generic error messages. Chose specific, actionable error messages: "Description too short: 12 words. Minimum recommended: 50 words." This keeps the experience educational even when the merchant submits incomplete data.
+We added explainability so the platform provides reasoning behind every recommendation and score.
 
 ---
 
-## Day 8 — Scoring Engine
+# Decision 4 — Flask-Based Backend Architecture
 
-**Decision: Weighting Formula**
-We considered equal weights across all 6 dimensions. Chose weighted scoring after researching which factors most affect AI recommendation rates:
-- Product descriptions: 25% (most read by AI agents)
-- Policy clarity: 20% (second biggest trust factor)
-- FAQ coverage: 18% (directly answers buyer queries AI agents relay)
-- Trust signals: 15% (credibility indicator)
-- Structured data: 12% (machine-readable attributes)
-- Review quality: 10% (supporting signal)
+## Considered
+- Node.js backend
+- Django backend
+- Flask backend
 
-**Decision: Score Thresholds**
-- 0–34: Needs Work (red)
-- 35–59: Developing (amber)
-- 60–79: Good (green)
-- 80–100: Excellent (dark green)
+## Chosen
+Flask backend architecture.
 
-Thresholds were set to be honest — most real stores score in the 30–50 range. Inflating scores would reduce merchant trust in the tool.
+## Reason
+Flask allowed faster prototyping, modular routing, lightweight API handling, and easier integration with Python-based analytics services.
 
----
+Since the project required:
+- AI integrations
+- Analytics engines
+- Scoring systems
+- Visualization generation
 
-## Day 9 — Documentation
-
-**Decision: What NOT to Build**
-We considered adding: user authentication, multi-store comparison, real-time monitoring, mobile app, browser extension. Chose to scope tightly to the core diagnostic + fix loop. Reasoning: a focused tool that does one thing excellently beats a broad tool that does many things poorly. All excluded features are documented as future improvements.
-
-**Decision: Explainability Over Black-Box Scoring**
-We deliberately chose to explain every score rather than just showing numbers. Merchants need to understand WHY they scored 34 — not just that they did. Explainability increases trust, reduces confusion, and makes recommendations actionable. This added development time but is core to the product value.
+Python provided a more efficient ecosystem for rapid development.
 
 ---
 
-## Day 10 — Final Polish & Submission
+# Decision 5 — KPI Dashboard Visualization
 
-**Decision: Deployment Platform — Render vs Railway vs Vercel**
-We considered Vercel (frontend-focused) and Railway. Chose Render because it supports both Flask backend and PostgreSQL database in one platform, has a free tier suitable for hackathon demos, and has straightforward environment variable management.
+## Considered
+- Text-only analysis reports
+- Interactive analytics dashboard
 
-**Decision: Demo Video Structure**
-We considered a feature walkthrough format. Chose problem-first structure: 30 seconds on the problem (why merchants are invisible to AI), then live demo, then outcome. Reasoning: judges need to feel the problem before they can appreciate the solution. Starting with features assumes they already care.
+## Chosen
+Interactive dashboard visualization.
+
+## Reason
+The project needed to simulate a merchant-facing SaaS experience.
+
+Visual KPI cards and charts improved:
+- Product understanding
+- Recommendation visibility
+- UX clarity
+- Demonstration quality during evaluation
+
+This decision improved usability and presentation value.
 
 ---
 
-## Summary of Key Tradeoffs
+# Decision 6 — Rule-Based Fallback Handling
 
-| Decision | What We Gave Up | What We Gained |
-|---|---|---|
-| Shopify API over manual input | Simpler setup | Real data, deeper analysis |
-| Chained prompts over single prompt | Speed (more API calls) | Output quality and debuggability |
-| Matplotlib over Recharts | Interactivity | Stability and PDF export capability |
-| Weighted scoring over equal weights | Simplicity | Accuracy and merchant relevance |
-| Focused scope over broad features | Feature count | Depth and polish on core flow |
-| Explainability over speed | Processing time | Merchant trust and actionability |
+## Considered
+- Complete dependency on OpenAI responses
+- Fallback scoring mechanisms
+
+## Chosen
+Fallback deterministic scoring system.
+
+## Reason
+AI APIs can fail because of:
+- Rate limits
+- Invalid responses
+- Timeout errors
+- Connectivity issues
+
+To prevent system breakdown, deterministic scoring continues even if AI responses fail.
+
+This ensured graceful degradation and stable application behavior.
+
+---
+
+# Decision 7 — Focus on Explainability Over Automation
+
+## Considered
+- Automatic product rewriting system
+- Merchant-guided recommendation workflow
+
+## Chosen
+Explainability-focused recommendation system.
+
+## Reason
+The goal was not only to generate recommendations but to help merchants understand AI perception problems.
+
+The platform therefore prioritizes:
+- Transparency
+- Problem visibility
+- Contextual reasoning
+- Optimization guidance
+
+instead of fully automated rewriting workflows.
+
+---
+
+# Decision 8 — Structured Repository and Documentation
+
+## Considered
+- Minimal hackathon-style repository
+- Production-style structured repository
+
+## Chosen
+Structured repository architecture.
+
+## Reason
+The hackathon evaluation strongly emphasized:
+- Documentation quality
+- Technical thinking
+- Decision clarity
+- Engineering structure
+
+We organized the repository with:
+- Service separation
+- Documentation folders
+- Decision logs
+- Contribution files
+- Technical documents
+
+This improved maintainability and demonstrated engineering discipline.
+
+---
+
+# Decision 9 — Prototype Scope Definition
+
+## Considered
+- Full SaaS authentication platform
+- Focused AI representation prototype
+
+## Chosen
+Focused functional prototype.
+
+## Reason
+Given the hackathon timeline, we prioritized:
+- AI representation analysis
+- Product optimization workflows
+- Explainable analytics
+- Recommendation systems
+
+instead of production-scale authentication and account management systems.
+
+This helped maintain product depth and technical clarity within the available timeframe.
+
+---
+
+# Final Engineering Philosophy
+
+StoreSignal was designed as a thoughtful AI-commerce intelligence system rather than a generic AI wrapper.
+
+The project focuses on:
+- Real merchant problems
+- AI perception visibility
+- Explainable analytics
+- Practical optimization workflows
+- Reliable hybrid system design
+
+The overall architecture balances:
+- AI reasoning
+- Deterministic validation
+- Product usability
+- Engineering simplicity
+- Failure resilience
+
+while remaining extensible for future production-scale development.
