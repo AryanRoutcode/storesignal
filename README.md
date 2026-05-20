@@ -27,7 +27,7 @@ StoreSignal is a merchant intelligence platform that:
 
 ## Demo Video
 
-▶️ [Watch the demo](YOUR_YOUTUBE_LINK_HERE)
+▶️ [Watch the demo](https://drive.google.com/file/d/1oy3CgAnZLMQnR6nHkUV4JEl2OgvNSNld/view?usp=drivesdk)
 
 ---
 
